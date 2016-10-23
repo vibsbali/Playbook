@@ -21,6 +21,7 @@
     <IISExpressUseClassicPipelineMode />
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,6 +114,10 @@
     <Content Include="Apps\common\js\services\addToken.js" />
     <Content Include="Apps\common\js\services\loginRedirect.js" />
     <Content Include="Apps\common\templates\alerts.html" />
+    <Content Include="Apps\diagnostics\module.js" />
+    <Content Include="Apps\diagnostics\shell.html" />
+    <Content Include="Apps\diagnostics\js\controllers\errorProneController.js" />
+    <Content Include="Apps\diagnostics\templates\nav.html" />
     <Content Include="Apps\security\js\services\recipes.js" />
     <Content Include="Apps\common\js\services\requestCounter.js" />
     <Content Include="Apps\common\js\services\localStorage.js" />

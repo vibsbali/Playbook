@@ -5,6 +5,7 @@
 
     function alerting() {
         var currentAlerts = [];
+        var alertTypes = ["success", "info", "warning", "danger"];
 
         return {
             addAlert: addAlert,
@@ -12,7 +13,8 @@
             addWarning: addWarning,
             addInfo: addInfo,
             addSuccess: addSuccess,
-            currentAlerts: currentAlerts
+            currentAlerts: currentAlerts,
+            alertTypes: alertTypes
         };
 
         function addWarning(message) {

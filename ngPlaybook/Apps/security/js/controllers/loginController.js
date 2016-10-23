@@ -13,7 +13,7 @@
                      .then(function () {
                          loginRedirect.redirectPostLogin();
                      })
-                     .catch(alerting.errorHandler("Could not login"));
+                     .catch(alerting.addDanger("Could not login"));
                 model.password = model.username = "";
                 form.$setUntouched();                
             }
