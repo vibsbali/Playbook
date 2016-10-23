@@ -1,5 +1,3 @@
 ﻿(function() {
-
-    var module = angular.module("common", []);
-
+    angular.module("common", []);
 }());

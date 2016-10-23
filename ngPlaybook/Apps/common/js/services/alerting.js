@@ -1,52 +1,42 @@
-﻿(function(common) {
+﻿"use strict";
+(function () {
+    angular.module("common")
+        .factory("alerting", alerting);
 
-    var alerting = function($timeout) {
-
+    function alerting() {
         var currentAlerts = [];
-        
-        var addWarning = function (message) {
-            var alert = { type: "warning", message: message };
-            addAlert(alert);
-        };
-
-        var addInformation = function(message) {
-            var alert = { type: "info", message: message };
-            addAlert(alert);
-        };
-
-        var addDanger = function(message) {
-            var alert = { type: "danger", message: message };
-            addAlert(alert);
-        };
-
-        var addAlert = function(alert) {
-            currentAlerts.push(alert);
-            $timeout(function() {
-                for (var i = 0; i < currentAlerts.length; i++) {
-                    if (currentAlerts[i] == alert) {
-                        currentAlerts.splice(i, 1);
-                        break;
-                    }
-                }
-            }, 10000);
-        };
-
-        var errorHandler = function(description) {
-            return function() {
-                addDanger(description);
-            };
-        };
-
 
         return {
-            errorHandler: errorHandler,
-            addInformation: addInformation,
+            addAlert: addAlert,
+            addDanger: addDanger,
             addWarning: addWarning,
+            addInfo: addInfo,
+            addSuccess: addSuccess,
             currentAlerts: currentAlerts
         };
 
+        function addWarning(message) {
+            addAlert("warning", message);
+        };
+
+        function addDanger(message) {
+            addAlert("danger", message);
+        };
+
+        function addInfo(message) {
+            addAlert("info", message);
+        };
+
+        function addSuccess(message) {
+            addAlert("warning", message);
+        };
+
+        function addAlert(type, message) {
+            currentAlerts.push({
+                type: type,
+                message: message
+            });
+        };
     };
 
-    common.factory("alerting", alerting);
-
-}(angular.module("common")))
+}());
