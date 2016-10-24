@@ -1,7 +1,10 @@
 ﻿<table class="table table-bordered">
     <tr ng-repeat="alert in currentAlerts" class="{{alert.type}}">
         <td>
-           {{ alert.message }}
+            {{ alert.message }}
+            <div class="close" ng-click="removeAlert(alert)">
+                <span class="glyphicon glyphicon-remove"></span>
+            </div>
         </td>
     </tr>
 </table>

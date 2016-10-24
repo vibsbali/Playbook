@@ -11,6 +11,11 @@
             scope: true,
             link: function(scope) {
                 scope.currentAlerts = alerting.currentAlerts;
+            },
+            controller: function($scope) {
+                $scope.removeAlert = function (alert) {
+                    alerting.removeAlert(alert);
+                };
             }
         };
     };

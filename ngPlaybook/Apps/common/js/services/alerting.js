@@ -1,9 +1,9 @@
 ﻿"use strict";
 (function () {
     angular.module("common")
-        .factory("alerting", alerting);
+        .factory("alerting", ["$timeout", alerting]);
 
-    function alerting() {
+    function alerting($timeout) {
         var currentAlerts = [];
         var alertTypes = ["success", "info", "warning", "danger"];
 
@@ -14,7 +14,8 @@
             addInfo: addInfo,
             addSuccess: addSuccess,
             currentAlerts: currentAlerts,
-            alertTypes: alertTypes
+            alertTypes: alertTypes,
+            removeAlert: removeAlert
         };
 
         function addWarning(message) {
@@ -33,11 +34,27 @@
             addAlert("warning", message);
         };
 
+        function removeAlert(alert) {
+            for (var i = 0; i < currentAlerts.length; i++) {
+                if (currentAlerts[i] === alert) {
+                    currentAlerts.splice(i, 1);
+                    break;
+                }
+            }  
+        };
+
         function addAlert(type, message) {
-            currentAlerts.push({
+            var alert = {
                 type: type,
                 message: message
-            });
+            };
+
+            currentAlerts.push(alert);
+
+            //This will remove the alert 
+            $timeout(function () {
+                    removeAlert(alert);
+                }, 5000);
         };
     };
 
