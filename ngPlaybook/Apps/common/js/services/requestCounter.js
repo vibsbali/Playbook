@@ -1,30 +1,34 @@
-﻿(function(module) {
-
-    var requestCounter = function($q) {
+﻿"use strict";
+(function () {
+    
+    angular.module("common")
+        .factory("requestCounter", requestCounter);
+   
+    function requestCounter($q) {
 
         var requests = 0;
-
-        var request = function(config) {
+        
+        function request(config) {
             requests += 1;
             return config;
         };
 
-        var requestError = function(error) {
-            requests -= 1;
-            return $q.reject(error);
-        };
-
-        var response = function(response) {
+        function response(response) {
             requests -= 1;
             return $q.when(response);
         };
 
-        var responseError = function(error) {
+        function requestError(error) {
             requests -= 1;
             return $q.reject(error);
         };
 
-        var getRequestCount = function() {
+        function responseError(error) {
+            requests -= 1;
+            return $q.reject(error);
+        };
+
+        function getRequestCount() {
             return requests;
         };
 
@@ -37,11 +41,4 @@
         };
 
     };
-
-    module.factory("requestCounter", requestCounter);
-
-    module.config(function($httpProvider) {
-        $httpProvider.interceptors.push("requestCounter");
-    });
-
-}(angular.module("common")));
+}());

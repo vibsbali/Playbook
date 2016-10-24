@@ -29,5 +29,6 @@
     app.config(function($httpProvider) {
         $httpProvider.interceptors.push("addToken");
         $httpProvider.interceptors.push("loginRedirect");
+        $httpProvider.interceptors.push("requestCounter");
     });
 }());
