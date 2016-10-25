@@ -1,7 +1,7 @@
 ﻿
 (function (module) {
 
-    var adminController = function (Employee, alerting) {
+    var adminController = function (Employee, alerting, confirmPromotion) {
         var model = this;
 
         model.employees = [
@@ -12,14 +12,18 @@
             new Employee("Glory", "Altimira", 3)
         ];
 
+
         model.promote = function (employee) {
-            for (var i = 0; i < model.employees.length; i++) {
-                if (employee === model.employees[i]) {
-                    model.employees.splice(i, 1);
-                    alerting.addInfo(employee.lastName + " promoted!");
-                    break;
-                }
-            };
+            confirmPromotion(employee)
+                .then(function () {
+                    for (var i = 0; i < model.employees.length; i++) {
+                        if (employee === model.employees[i]) {
+                            model.employees.splice(i, 1);
+                            alerting.addInfo(employee.lastName + " promoted!");
+                            break;
+                        }
+                    };
+                });
         };
     };
 
